@@ -20,4 +20,4 @@ To Run
 
 1. `git clone` the repository locally
 2. Using the command line, navigate to the cloned directory and run `yarn install`
-3. Run `yarn-start`
+3. Run `yarn start`
