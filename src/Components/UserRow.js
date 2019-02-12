@@ -10,7 +10,7 @@ export default function UserRow(props) {
   return (
     <tr key={user.key}>
       <td>
-        <img src={user.image}/>
+        <img src={user.image} alt=""/>
       </td>
       <td>{user.first}</td>
       <td>{user.last}</td>

@@ -52,7 +52,7 @@ export default class UserListContainer extends React.Component {
         comparison = -1;
       }
       return (
-        (order == 'desc') ? (comparison * -1) : comparison
+        (order === 'desc') ? (comparison * -1) : comparison
       );
     };
   }
@@ -61,7 +61,7 @@ export default class UserListContainer extends React.Component {
     if (this.state.selectedUser !== null) {
       this.unselectUser(this.state.selectedUser)
     }
-  
+
     let users = this.state.users.filter(function (obj) {
       return obj.id !== user.id;
     });
