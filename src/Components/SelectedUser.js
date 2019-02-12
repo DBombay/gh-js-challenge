@@ -9,7 +9,7 @@ export default function SelectedUser(props) {
       <Table borderless>
         <UserHeader/>
         <tbody>
-        <UserRow user={props.user}/>
+        <UserRow user={props.user} key={props.user.id} selected={true} onClick={props.onClick}/>
         </tbody>
       </Table>
     </div>
