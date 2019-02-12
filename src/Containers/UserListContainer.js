@@ -8,11 +8,16 @@ export default class UserListContainer extends React.Component {
     super(props);
     this.buildUserRows = this.buildUserRows.bind(this);
     this.selectUser = this.selectUser.bind(this);
+    this.sortNames = this.sortNames.bind(this);
     this.unselectUser = this.unselectUser.bind(this);
     this.state = {
       users: this.props.users,
       selectedUser: null
     }
+  }
+
+  componentWillReceiveProps(props) {
+    this.sortNames('first', 'asc')
   }
 
   buildUserRows(users) {
@@ -29,7 +34,34 @@ export default class UserListContainer extends React.Component {
     )
   }
 
+  compareValues(key, order = 'asc') {
+    return function (a, b) {
+      if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+        return 0;
+      }
+
+      const varA = (typeof a[key] === 'string') ?
+        a[key].toUpperCase() : a[key];
+      const varB = (typeof b[key] === 'string') ?
+        b[key].toUpperCase() : b[key];
+
+      let comparison = 0;
+      if (varA > varB) {
+        comparison = 1;
+      } else if (varA < varB) {
+        comparison = -1;
+      }
+      return (
+        (order == 'desc') ? (comparison * -1) : comparison
+      );
+    };
+  }
+
   selectUser(user) {
+    if (this.state.selectedUser !== null) {
+      this.unselectUser(this.state.selectedUser)
+    }
+  
     let users = this.state.users.filter(function (obj) {
       return obj.id !== user.id;
     });
@@ -39,6 +71,14 @@ export default class UserListContainer extends React.Component {
         selectedUser: user
       }
     )
+  }
+
+  sortNames(value, direction) {
+    let users = this.state.users;
+
+    this.setState({
+      users: users.sort(this.compareValues(value, direction))
+    })
   }
 
   unselectUser(user) {
@@ -62,7 +102,7 @@ export default class UserListContainer extends React.Component {
         <div className='row'>
           <h1>Users</h1>
           <Table hover>
-            <UserHeader/>
+            <UserHeader compare={this.sortNames} selected={false}/>
             {this.buildUserRows(this.state.users)}
           </Table>
         </div>

@@ -7,7 +7,7 @@ export default function SelectedUser(props) {
     <div className='container-fluid'>
       <h1>Selected User</h1>
       <Table borderless>
-        <UserHeader/>
+        <UserHeader selected={true}/>
         <tbody>
         <UserRow user={props.user} key={props.user.id} selected={true} onClick={props.onClick}/>
         </tbody>
