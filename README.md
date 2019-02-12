@@ -3,7 +3,7 @@ JS Challenge
 
 Tasks
 --
-- [ ] Use `users.json` file to display a list of users. 
+- [x] Use `users.json` file to display a list of users. 
 
     Display the following fields:
     - [x] Image 

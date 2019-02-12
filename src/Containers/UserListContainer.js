@@ -1,24 +1,22 @@
 import React from 'react'
 import {SelectedUser, UserRow} from '../Components'
-import User from '../lib/User.js'
 import {Table} from 'reactstrap'
+import UserHeader from "../Components/UserHeader";
 
 export default class UserListContainer extends React.Component {
   constructor(props) {
     super(props);
     this.buildUserRows = this.buildUserRows.bind(this);
     this.state = {
-      users: {},
-      selectedUser: {}
+      users: this.props.users,
+      selectedUser: null
     }
   }
 
   buildUserRows(users) {
-    const UsersList = Object.keys(users).map((key) => {
-      const user = new User(key);
-
+    const UsersList = users.map((user) => {
       return (
-        <UserRow user={user}/>
+        <UserRow user={user} key={user.id}/>
       )
     });
 
@@ -31,21 +29,19 @@ export default class UserListContainer extends React.Component {
 
   render() {
     return (
-      <div className='container'>
-        <div className="row justify-content-center">
+      <div className='container w-100'>
+        {this.state.selectedUser &&
+        <div className="row">
           <SelectedUser user={this.state.selectedUser}/>
         </div>
-        <Table hover>
-          <thead>
-          <tr>
-            <th>Image</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-          </tr>
-          </thead>
-          {this.buildUserRows}
-        </Table>
+        }
+        <div className='row'>
+          <h1>Users</h1>
+          <Table hover>
+            <UserHeader/>
+            {this.buildUserRows(this.state.users)}
+          </Table>
+        </div>
       </div>
     )
   }
