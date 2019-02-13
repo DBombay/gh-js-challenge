@@ -23,7 +23,7 @@ To Run my example code
 3. Run `yarn start`
 
 
-Json Object (otherwise in `src/lib/user.json`
+Json Object (otherwise in `src/lib/user.json`)
 ---
 ```
 [
