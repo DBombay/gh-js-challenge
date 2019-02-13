@@ -13,7 +13,6 @@ export default class UserHeader extends React.Component {
   }
 
   toggle(column) {
-    console.log(this.state)
     if (column === "first") {
       this.props.compare('first', this.state.first ? 'asc' : 'desc');
       this.setState({
